@@ -25,6 +25,9 @@ public class Main {
             else if(st.equals("pop")){
                 System.out.println(s.peek()); s.pop();
             }
+            else if(st.equals("top")){
+                System.out.println(s.peek());
+            }
         }
     }
 }
