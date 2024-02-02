@@ -17,7 +17,7 @@ public class Main {
                 System.out.println(s.size());
             }
             else if(st.equals("empty")){
-                if(s.empty())
+                if(s.isEmpty())
                     System.out.println(1);
                 else
                     System.out.println(0);
