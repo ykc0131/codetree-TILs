@@ -69,6 +69,8 @@ public class Main {
     public static void solve(){
         dij();
         for(int i=2; i<=n; i++){
+            if(dist[i]==MAX_N)
+                dist[i] = -1;
             System.out.println(dist[i]);
         }
     }
