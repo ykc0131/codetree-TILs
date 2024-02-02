@@ -15,8 +15,10 @@ public class Main {
         Arrays.sort(arr, (a,b)->a[0]==b[0]?a[1]-b[1]:a[0]-b[0]);
 
         int cnt = 0;
-        for(int i=1; i<n; i++){
+        for(int i=2; i<n; i++){
             if(arr[i-1][1] < arr[i][0])
+                cnt++;
+            else if(arr[i-2][1] < arr[i][0])
                 cnt++;
         }
 
