@@ -1,26 +1,20 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#define INF 100001
 
 using namespace std;
 
 int n;
 vector<vector<int>> grid;
-//vector<vector<int>> dist;
 
 void init(){
     cin >> n;
     
     grid.clear();
-    //dist.clear();
     grid.resize(n+1,vector<int>(n+1,0));
-    //dist.resize(n+1,vector<int>(n+1,INF));
     for(int i=1; i<n+1; i++){
         for(int j=1; j<n+1; j++){
             cin >> grid[i][j];
-            // if(grid[i][j])
-            //     dist[i][j] = 1;
         }
     }
 }
