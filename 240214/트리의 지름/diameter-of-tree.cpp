@@ -2,10 +2,13 @@
 #include <vector>
 #include <algorithm>
 
+#define INF 100000
+
 using namespace std;
 
 int n;
 vector<vector<pair<int,int>>> tree;
+vector<int> dist;
 
 void init(){
     cin >> n;
@@ -32,18 +35,35 @@ void dfs(int N, int sum){
         int next = tree[N][i].first;
 
         if(!visit[next]){
-            dfs(next, sum + tree[N][i].second);
+            dist[next] = sum + tree[N][i].second;
+            dfs(next, dist[next]);
         }
     }
-    result = max(result, sum);
+}
+
+pair<int,int> findVertex(int N){
+    visit.clear();
+    visit.resize(n+1,false);
+    dist.clear();
+    dist.resize(n+1,INF);
+
+    dist[N] = 0;
+    dfs(N,0);
+
+    int maxV=0, maxD=0;
+    for(int i=1; i<n+1; i++){
+        if(dist[i] > maxD){
+            maxD = dist[i];
+            maxV = i;
+        }
+    }
+    return {maxV, maxD};
 }
 
 void solve(){
-    for(int i=1; i<n+1; i++){
-        visit.clear();
-        visit.resize(n+1,false);
-        dfs(i,0);
-    }
+    int maxV = findVertex(1).first;
+
+    int result = findVertex(maxV).second;
     cout << result << "\n";
 }
 
