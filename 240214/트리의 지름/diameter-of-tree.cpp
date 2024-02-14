@@ -38,9 +38,9 @@ void dfs(int N, int sum){
 }
 
 void solve(){
-    visit.clear();
-    visit.resize(n+1,false);
     for(int i=1; i<n+1; i++){
+        visit.clear();
+        visit.resize(n+1,false);
         dfs(i,0);
     }
     cout << result << "\n";
