@@ -17,6 +17,7 @@ void init(){
         cin >> u >> v >> cost;
 
         tree[u].push_back({v,cost});
+        tree[v].push_back({u,cost});
     }
 }
 
