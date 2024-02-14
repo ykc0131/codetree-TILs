@@ -21,8 +21,8 @@ void init(){
 }
 
 vector<bool> visit;
-int sum = 0 , result = 0;
-void dfs(int N){
+int sum = 0, result = 0;
+void dfs(int N, int sum){
     if(visit[N])
         return;
     visit[N] = true;
@@ -31,9 +31,7 @@ void dfs(int N){
         int next = tree[N][i].first;
 
         if(!visit[next]){
-            sum += tree[N][i].second;
-            dfs(next);
-            sum -= tree[N][i].second;
+            dfs(next, sum + tree[N][i].second);
         }
     }
     result = max(result, sum);
@@ -42,7 +40,9 @@ void dfs(int N){
 void solve(){
     visit.clear();
     visit.resize(n+1,false);
-    dfs(1);
+    for(int i=1; i<n+1; i++){
+        dfs(i,0);
+    }
     cout << result << "\n";
 }
 
@@ -51,3 +51,6 @@ int main() {
     solve();
     return 0;
 }
+
+//트리의 지름을 가장 쉽게 구하는 방법
+// 1~N까지 dfs 돌리기
