@@ -47,7 +47,7 @@ int bfs(int x){
         int curCost = bq.front().second; bq.pop();
         if(visit[cur])
             continue;
-        visit[cur] = 0;
+        visit[cur] = true;
 
         for(int i=0; i<tree[cur].size(); i++){
             int next = tree[cur][i];
