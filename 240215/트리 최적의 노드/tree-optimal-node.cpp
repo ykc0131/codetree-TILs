@@ -1,79 +1,67 @@
 #include <iostream>
 #include <vector>
-#include <queue>
-#define INF 100001
+#define INF 10000000
 
 using namespace std;
 
 int n;
 vector<vector<int>> tree;
-vector<int> edgeCnt;
-queue<int> q;
 
 void init(){
     cin >> n;
     tree.clear();
-    edgeCnt.clear();
     tree.resize(n+1);
-    edgeCnt.resize(n+1,0);
 
     for(int i=0; i<n-1; i++){
-        int u, v;
+        int u,v,cost;
         cin >> u >> v;
 
         tree[u].push_back(v);
         tree[v].push_back(u);
     }
+}
 
-    int maxN = 0;
-    for(int i=1; i<n+1; i++){
-        edgeCnt[i] = tree[i].size();
-        if(maxN < edgeCnt[i]){
-            q = queue<int>();
-            maxN = edgeCnt[i];
-        }
-        
-        if(maxN == edgeCnt[i]){
-            q.push(i);
+vector<int> visit;
+vector<int> dist;
+void dfs(int n, int sum){
+    if(visit[n])
+        return;
+    visit[n] = true;
+
+    for(int i=0; i<tree[n].size(); i++){
+        int next = tree[n][i];
+
+        if(!visit[next]){
+            dist[next] = sum + 1;
+            dfs(next, sum + 1);
         }
     }
 }
 
-int bfs(int x){
-    vector<int> visit(n+1,false);
-    queue<pair<int,int>> bq;
-    bq.push({x,0});
-    int cnt = 0;
+pair<int,int> findLongestVertex(int x){
+    visit.clear();
+    dist.clear();
+    visit.resize(n+1,false);
+    dist.resize(n+1,INF);
+    dist[x] = 0;
+    dfs(x,0);
 
-    while(!bq.empty()){
-        int cur = bq.front().first;
-        int curCost = bq.front().second; bq.pop();
-        if(visit[cur])
-            continue;
-        visit[cur] = true;
-
-        for(int i=0; i<tree[cur].size(); i++){
-            int next = tree[cur][i];
-
-            if(!visit[next]){
-                bq.push({next, curCost + 1});
-            }
+    int maxV = 0, maxD = 0;
+    for(int i=1; i<n+1; i++){
+        if(maxD < dist[i]){
+            maxD = dist[i];
+            maxV = i;
         }
-        cnt++;
-        if(cnt==n)
-            return curCost;
     }
+    return {maxV, maxD};
 }
 
 void solve(){
-    int result = INF;
-    while(!q.empty()){
-        int cur = q.front(); q.pop();
-        int longest = bfs(cur);
-        result = min(result, longest);
-    }
+    pair<int,int> longest = findLongestVertex(1);
 
-    cout << result << endl;
+    pair<int,int> diameter = findLongestVertex(longest.first);
+
+    cout << (diameter.second+1)/2 << endl;
 }
 
 int main() {
