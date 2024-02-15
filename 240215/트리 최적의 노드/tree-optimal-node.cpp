@@ -31,6 +31,9 @@ void init(){
         if(maxN < edgeCnt[i]){
             q = queue<int>();
             maxN = edgeCnt[i];
+        }
+        
+        if(maxN == edgeCnt[i]){
             q.push(i);
         }
     }
