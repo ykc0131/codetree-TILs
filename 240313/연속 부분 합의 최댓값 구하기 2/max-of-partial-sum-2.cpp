@@ -18,7 +18,7 @@ void init(){
 void solve(){
     int result=MAXN, value=0;
     for(int i=0; i<n; i++){
-        if(value+input[i]>0)
+        if(value+input[i]>=0)
             value += input[i];
         else
             value = input[i];
