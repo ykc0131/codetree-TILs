@@ -7,7 +7,7 @@
 using namespace std;
 
 int n;
-vector<int> vec;
+vector<long long> vec;
 void init(){
     cin >> n;
     vec.resize(n,0);
@@ -16,9 +16,9 @@ void init(){
     }
 }
 
-bool customeCmp(int a, int b){
-    int cmp1 = a*pow(10,to_string(b).size()) + b;
-    int cmp2 = b*pow(10,to_string(a).size()) + a;
+bool customeCmp(long long a, long long b){
+    long long cmp1 = a*pow(10,to_string(b).size()) + b;
+    long long cmp2 = b*pow(10,to_string(a).size()) + a;
 
     return cmp1 > cmp2;
 }
