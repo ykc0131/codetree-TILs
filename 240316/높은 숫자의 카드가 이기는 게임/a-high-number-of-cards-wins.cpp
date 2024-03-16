@@ -48,7 +48,7 @@ void solve(){
     while(!pq.empty()){
         pair<int,int> cur = pq.top(); pq.pop();
 
-        if(cur.second-cnt>=0){
+        if(cur.second-cnt>0){
             result++;
             cnt++;
         }
