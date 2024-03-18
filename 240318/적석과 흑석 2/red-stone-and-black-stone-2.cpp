@@ -36,11 +36,13 @@ void solve(){
     int i=0, nIdx=0, result=0;
     while(i<C){
         int c = cVec[i];
+        if(nIdx>=N)
+            break;
 
         if(nVec[nIdx].first <= c && nVec[nIdx].second >= c){
             nIdx++;
             i++;
-            result ++;
+            result++;
         }
         else if(nVec[nIdx].first > c)
             i++;
